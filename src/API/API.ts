@@ -17,5 +17,5 @@ HARD = 'hard'
  }
 
  export const fetchQuestions = async (amount: number, difficulty : Difficulty, catergory: string ) =>{
-     
+    const endpoint = `http://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&category=${catergory}`;
  }
