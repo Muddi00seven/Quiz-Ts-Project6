@@ -63,11 +63,17 @@ function App() {
 
   return (
     <div className="App">
-      <QuestionCard/>
       {/* <QuizList/> */}
       <h1>Quiz 1</h1>
       {userAnswer.length === TotalQuestions ? <button onClick={() => {setGameOver(true);setUserAnswer([])}} > Restart </button>: null}
       {gameOver ? <QuizList quizStart={quizStart} setCategory={setCategory}/> : null}
+      {gameOver ? <p> {score}</p> : null}
+      {!loading && !gameOver ? (<QuestionCard questionNumber={number + 1}
+          totalQuestions={TotalQuestions}
+          question={questions[number].question}
+          answers={questions[number].answers}
+          userAnswer={userAnswer ? userAnswer[number] : undefined}
+          callback={checkAnswer}/>): null}
   </div>
   );
 }
