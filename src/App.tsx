@@ -15,52 +15,60 @@ const TotalQuestions = 10;
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [catergory , setCategory ] = useState('');
-  const[questions , setQuestions] = useState<QuestionState[]>([]);
-  const[Useranswer,setUserAnswer] = useState<AnswerObject[]>([]);
-  const[number, setNumber] = useState(0);
-  const[score , setScore] = useState(0);
-  const[gameOver , setGameOver] = useState(true )
-
-const startQuiz = async () =>{
-  setLoading(true);
-  setGameOver(false);
-  const newQuestions = await fetchQuestions(TotalQuestions, Difficulty.EASY,catergory);
-  setQuestions(newQuestions);
-  setNumber(0);
-  setUserAnswer([]);
-  setScore(0);
-  setLoading(false);
-  setScore(0);
-}
-
-const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
-  if(!gameOver){
-    const answer = e.currentTarget.value;
-    const correct = questions[number].correctAnswer === answer;
-    if(correct) {
-      setScore(score + 1);
+  const [questions, setQuestions] = useState<QuestionState[]>([]);
+  const [number, setNumber] = useState(0);
+  const [userAnswer, setUserAnswer] = useState<AnswerObject[]>([]);
+  const [score, setScore] = useState(0);
+  const [gameOver, setGameOver] = useState(true);
+  const [category,setCat] = useState("");
+  const quizStart = async () => {
+    setLoading(true);
+    setGameOver(false);
+    const newQuestions = await fetchQuestions(TotalQuestions, Difficulty.EASY,category);
+    setQuestions(newQuestions);
+    setScore(0);
+    setUserAnswer([]);
+    setNumber(0);
+    setLoading(false);
+  }
+  const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!gameOver) {
+      const answer = e.currentTarget.value;
+      const correct = questions[number].correctAnswer === answer;
+      if (correct) {
+        setScore(score + 1);
+      }
+      const answerObject = {
+        question: questions[number].question,
+        answer,
+        correct,
+        correctAnswer: questions[number].correctAnswer,
+      } 
+      setUserAnswer([...userAnswer, answerObject]);
     }
-    const answerObject = {
-      question : questions[number].question,
-      answer,
-      correct,
-      correct_Answer: questions[number].correctAnswer,
-    }
-    setUserAnswer([...Useranswer, answerObject]);
-
   }
 
-}
-  
+  const nextQuestion = () => {
+    const nextQuestion = number + 1;
+    if (nextQuestion !== TotalQuestions) {
+      setNumber(nextQuestion);
+    }
+  }
+
+  const setCategory = (e:React.MouseEvent<HTMLOptionElement>) => {
+    const value = e.currentTarget.value;
+    setCat(value);
+  } 
 
 
   return (
     <div className="App">
       <QuestionCard/>
       <QuizList/>
-      <h1>HELLO WOLRD</h1>
-    </div>
+      <h1>Quiz 1</h1>
+      {userAnswer.length === TotalQuestions ? <button onClick={() => {setGameOver(true);setUserAnswer([])}} > Restart </button>: null}
+      {gameOver ? <QuizList quizStart={quizStart} setCategory={setCategory}/> : null}
+  </div>
   );
 }
 
