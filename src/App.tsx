@@ -64,7 +64,7 @@ function App() {
   return (
     <div className="App">
       <QuestionCard/>
-      <QuizList/>
+      {/* <QuizList/> */}
       <h1>Quiz 1</h1>
       {userAnswer.length === TotalQuestions ? <button onClick={() => {setGameOver(true);setUserAnswer([])}} > Restart </button>: null}
       {gameOver ? <QuizList quizStart={quizStart} setCategory={setCategory}/> : null}
