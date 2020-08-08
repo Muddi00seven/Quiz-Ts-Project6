@@ -70,7 +70,7 @@ const App = () => {
         {!gameOver ? <p className="score">Score: {score}</p> : null}
         {loading ? <h3>Loading Questions....</h3> : null}
         {!loading && !gameOver ? (<QuestionCard
-          questionNr={number + 1}
+          questionNumber={number + 1}
           totalQuestions={TOTAL_QUESTIONS}
           question={questions[number].question}
           answers={questions[number].answers}

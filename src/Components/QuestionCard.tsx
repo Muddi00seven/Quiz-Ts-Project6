@@ -1,20 +1,26 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AnswerObject} from "../App";
 import {Wrapper,ButtonWrapper} from "../Styles/QuestionCard.styles";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 type Props = {
     question: string;
     answers: string[];
     callback: (e:React.MouseEvent<HTMLButtonElement>) => void;
     userAnswer: AnswerObject | undefined;
-    questionNr: number;
+    questionNumber: number;
     totalQuestions: number;
 }
 
-const QuestionCard: React.FC<Props> = ({ question, answers, callback, userAnswer, questionNr, totalQuestions }) => {
+const QuestionCard: React.FC<Props> = ({ question, answers, callback, userAnswer, questionNumber, totalQuestions }) => {
+    useEffect(() => {
+        AOS.init();
+        AOS.refresh();
+      });
     return (
         <Wrapper>
             <p className="number">
-                QUESTION: {questionNr} / {totalQuestions}
+                QUESTION: {questionNumber} / {totalQuestions}
             </p>
             <p dangerouslySetInnerHTML={{ __html: question }} />
             <div>

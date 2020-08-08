@@ -9,8 +9,6 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background-image: url("https://i.pinimg.com/originals/65/99/ae/6599ae0e0488b5ab2da2fd9cbb9757d9.gif");
         background-size: cover;
-        margin: 0;
-        padding: 0;
         display: flex;
         justify-content: center;
 
@@ -38,14 +36,8 @@ export const Wrapper = styled.div`
 
     h1 {
         font-family: Fascinate Inline,Haettenschweiler,'Arial Narrow Bold',sans-serif;
-        background-image: linear-gradient(180deg,#fff,red);
-        background-size: 100%;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: rgba(250,0,0,0.5);
-        -moz-background-clip: text;
-        -moz-text-fill-color: red;
-        filter: drop-shadow(2px 2px #0085a3);
+        /* background-image: linear-gradient(180deg,#fff,red); */
+        background-color : #3a8ac7;
         font-size: 70px;
         text-align: center;
         margin: 2px;
@@ -54,7 +46,7 @@ export const Wrapper = styled.div`
 
     .start,.next {
         cursor: pointer;
-        background: linear-gradient(180deg,#fff,#ffcc91);
+        background-color : #3a8ac7;
         border: 2px solid #d38558;
         box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
         border-radius: 10px;
