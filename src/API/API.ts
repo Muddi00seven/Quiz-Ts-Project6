@@ -1,29 +1,30 @@
-import {QuestionShuffle} from './Shuffle'
+import { shuffleMath } from "./Shuffle/MathShuffle";
 
-export type Questions = {
-    catergory : string;
-    correctAnswer: string;
+export type Quiz = {
+    category: string;
     difficulty: string;
-    incorrectAnswer: string[];
-    question : string;
-    type: string
+    type: string;
+    correct_answer: string;
+    question: string;
+    incorrect_answers: string[];
 }
- export type QuestionState = Questions & {answers: string[]}
 
- export enum Difficulty  {
-EASY = 'easy',
-MEDIUM = 'medium',
-HARD = 'hard'
- }
+export type QuestionState = Quiz & { answers: string[] }
 
- export const fetchQuestions = async (amount: number, difficulty : Difficulty, catergory: string ) =>{
-    const endpoint = `http://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&category=${catergory}`;
-    const data = await(await fetch(endpoint)).json();
-    return  data.results.map((question: Questions) =>{
+export enum Difficulty {
+    EASY = "easy",
+    MEDIUM = "medium",
+    HARD = "hard",
+}
+
+export const fetchQuizQuestions = async (amount: number, difficulty: Difficulty,category: string) => {
+    console.log(category);
+    const fetchUrl = `http://opentdb.com/api.php?amount=${amount}&difficulty=${difficulty}&type=multiple&category=${category}`;
+    const data = await (await fetch(fetchUrl)).json();
+    return data.results.map((question: Quiz) => {
         return({
             ...question,
-            answers: QuestionShuffle([...question.incorrectAnswer, question.correctAnswer])
+            answers: shuffleMath([...question.incorrect_answers, question.correct_answer])
         })
-    }) 
-
+    })
 }

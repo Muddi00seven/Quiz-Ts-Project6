@@ -1,44 +1,39 @@
 import React from 'react';
 import {AnswerObject} from "../App";
-
+import {Wrapper,ButtonWrapper} from "../Styles/QuestionCard.styles";
 type Props = {
-    question : string;
-    answers : string[];
-    callback : ( e: React.MouseEvent<HTMLButtonElement>) => void;
-    userAnswer : AnswerObject | undefined;
-    questionNumber: number;
-    totalQuestions : number;
-
+    question: string;
+    answers: string[];
+    callback: (e:React.MouseEvent<HTMLButtonElement>) => void;
+    userAnswer: AnswerObject | undefined;
+    questionNr: number;
+    totalQuestions: number;
 }
 
-const QuestionCard: React.FC<Props> = ({question , answers, callback , userAnswer, questionNumber , totalQuestions}) => {
+const QuestionCard: React.FC<Props> = ({ question, answers, callback, userAnswer, questionNr, totalQuestions }) => {
     return (
-        <>
-        <div>
-            <p>
-                Questions : {questionNumber} / {totalQuestions}
+        <Wrapper>
+            <p className="number">
+                QUESTION: {questionNr} / {totalQuestions}
             </p>
-            <p dangerouslySetInnerHTML={{__html : question}} />
-                
+            <p dangerouslySetInnerHTML={{ __html: question }} />
             <div>
-            {answers.map(answer => {
+                {answers.map(answer => {
                     return (
-                        // <h2
-                        // correct={userAnswer?.correctAnswer === answer}
-                        // userClicked={userAnswer?.answer === answer}
-                        // key={answer}
-                        // >
+                        <ButtonWrapper
+                        correct={userAnswer?.correctAnswer === answer}
+                        userClicked={userAnswer?.answer === answer}
+                        key={answer}
+                        >
                             <button disabled={userAnswer ? true:false} value={answer} onClick={callback}>
                                 <span dangerouslySetInnerHTML={{ __html: answer }} />
                             </button>
-                        // </h2>
+                        </ButtonWrapper>
                     )
                 })}
-                
             </div>
-        </div>
-        </> 
+        </Wrapper>
     )
 }
 
-export default QuestionCard
+export default QuestionCard;
