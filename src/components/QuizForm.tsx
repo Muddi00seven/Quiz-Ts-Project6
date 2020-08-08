@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Wrapper } from "../Styles/QuestionCard.styles";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 type Props = {
     id: number,
@@ -20,12 +22,16 @@ const QuizForm: React.FC<FormProps> = ({ startTrivia, setCategory }) => {
         }
         fetchData();
     })
+    useEffect(() => {
+        AOS.init();
+        AOS.refresh();
+      });
     return (
         <>
             <Wrapper>
                 <label>SELECT CATERGORY</label>
                 <br />
-                <select required>
+                <select required data-aos="fade-zoom-in">
                     {data ? data.map((category) => { return (<option value={category.id} key={category.id} onClick={(e) => setCategory(e)}>{category.name}</option>) }) : (<option>DEFAULT</option>)}
                 </select>
             </Wrapper>

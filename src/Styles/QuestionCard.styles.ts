@@ -35,15 +35,13 @@ export const ButtonWrapper = styled.div<ButtonWrapperProps>`
     margin: 5px 0;
     background: ${({ correct, userClicked }) =>
       correct
-        ? 'linear-gradient(90deg, rgb(0,100,0), rgb(0,255,0))'
+        ? 'blue'
         : !correct && userClicked
-        ? 'linear-gradient(90deg, rgb(100,0,0), rgb(255,0,0))'
-        : 'linear-gradient(90deg, rgb(0,0,100), rgb(0,0,255))'};
+        ? 'red'
+        : '#3a444d'};
     border: 3px solid #ffffff;
-    box-shadow: 1px 2px 0px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     color: #fff;
-    text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25); 
     }
         
     }

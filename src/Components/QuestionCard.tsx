@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react';
-import {AnswerObject} from "../App";
-import {Wrapper,ButtonWrapper} from "../Styles/QuestionCard.styles";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+
+import {AnswerObject} from "../App";
+import {Wrapper,ButtonWrapper} from "../Styles/QuestionCard.styles";
 type Props = {
     question: string;
     answers: string[];

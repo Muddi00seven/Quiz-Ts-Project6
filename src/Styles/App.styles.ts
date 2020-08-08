@@ -29,14 +29,13 @@ export const Wrapper = styled.div`
     }
 
     .score {
-        color: black;
+        color: white;
         font-size: 2rem;
         margin: 0;
     }
 
     h1 {
         font-family: Fascinate Inline,Haettenschweiler,'Arial Narrow Bold',sans-serif;
-        /* background-image: linear-gradient(180deg,#fff,red); */
         background-color : #3a8ac7;
         font-size: 70px;
         text-align: center;
@@ -45,14 +44,13 @@ export const Wrapper = styled.div`
     }
 
     .start,.next {
-        cursor: pointer;
         background-color : #3a8ac7;
-        border: 2px solid #d38558;
-        box-shadow: 0px 5px 10px rgba(0,0,0,0.25);
-        border-radius: 10px;
+        border-radius: 30px;
         height: 40px;
         margin: 20px 0;
         padding: 0 40px;
+        cursor: pointer;
+
     }
 
     .start {

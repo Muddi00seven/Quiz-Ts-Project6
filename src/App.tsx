@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import { Wrapper , GlobalStyle } from "./Styles/App.styles";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { fetchQuizQuestions, Difficulty, QuestionState } from "./API/API";
 import QuestionCard from "./components/QuestionCard";
 import QuizForm from "./components/QuizForm";
@@ -15,6 +16,10 @@ export type AnswerObject = {
 const TOTAL_QUESTIONS = 10;
 
 const App = () => {
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  });
   const [loading, setLoading] = useState(false);
   const [questions, setQuestions] = useState<QuestionState[]>([]);
   const [number, setNumber] = useState(0);
@@ -64,12 +69,13 @@ const App = () => {
     <>
       <GlobalStyle />
       <Wrapper>
-        <h1>React Quiz</h1>
+        <h1 data-aos="fade-zoom-in">QUIZ TIME</h1>
         {userAnswers.length === TOTAL_QUESTIONS ? <button className="start" onClick={() => { setGameOver(true); setUserAnswers([])} }>Back To Start</button> : null}
-        {gameOver ? <QuizForm startTrivia={startTrivia} setCategory={setCategory}/> : null}
+        {gameOver ? <QuizForm data-aos="flip-left" startTrivia={startTrivia} setCategory={setCategory}/> : null}
         {!gameOver ? <p className="score">Score: {score}</p> : null}
-        {loading ? <h3>Loading Questions....</h3> : null}
-        {!loading && !gameOver ? (<QuestionCard
+        {loading ? <img src="https://media.tenor.com/images/6a5bcfba04e217d91f7aec29849ae208/tenor.gif" data-aos="flip-up" alt="loading" /> : null}
+
+        {!loading && !gameOver ? (<QuestionCard data-aos="flip-left"
           questionNumber={number + 1}
           totalQuestions={TOTAL_QUESTIONS}
           question={questions[number].question}
